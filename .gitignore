@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
+
+# エディタ
+.vscode/
+.idea/
+*.swp
+
+# 環境変数
+.env
+
+# instagram/posts/ と instagram/out/ は「いつ何を出したか」の記録として
+# 意図的にコミットする。ここに追加しないこと。
