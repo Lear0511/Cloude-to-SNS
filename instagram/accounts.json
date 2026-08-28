@@ -7,13 +7,16 @@
     "tagline": "人から人へ渡る喜びを",
     "mission": "リユース業を通じてすべての人に、新たな価値観、新たな発見、新たな喜びを提供",
     "timezone": "Asia/Tokyo",
+    "posting_tool": "Meta Business Suite",
+    "_posting_tool_note": "予約投稿は Meta Business Suite で行う(オーナー判断・変更不可)。Buffer / Later / Hootsuite は採用しない(将来の乗り換えは残す)。Meta Business Suite は1件目のコメントを自動投稿できず、公開後に人が手で入れる必要がある。入れ忘れの事故を避けるため hashtag_placement の既定は caption(キャプション末尾にまとめて置く)とする。first_comment を指定した投稿は build-posts.py が WARN を出す。",
     "limits": {
       "caption_max": 2200,
       "hashtag_max": 30,
       "carousel_min": 2,
       "carousel_max": 20,
       "headline_soft_max": 20,
-      "alt_max": 100
+      "alt_max": 100,
+      "hashtag_placement_default": "caption"
     },
     "ng_words": [
       "絶対", "必ず高く", "業界No.1", "業界ナンバーワン", "日本一", "最高値保証", "買取保証",

@@ -2,8 +2,10 @@
 
 株式会社Ritz Solution Partner の **SNS投稿を Claude でつくって予約投稿する運用**の置き場です。
 
-投稿案は Web版 Claude で生成し、リポジトリ内のスクリプトで機械チェックしてから、SNS管理ツール（Meta Business Suite など）で予約投稿します。
+投稿案は Web版 Claude で生成し、リポジトリ内のスクリプトで機械チェックしてから、**Meta Business Suite** で予約投稿します。
 **各SNSの API 連携は持ちません。**アカウント停止のリスクを避けられること、公開前に必ず人の目が1回入ることが狙いです。
+
+予約投稿ツールは Meta Business Suite に一本化しました（2026-08-28 オーナー判断）。Meta 公式の管理画面で追加費用が発生せず、Instagram の予約投稿に必要な機能がそろうためです。Buffer / Later / Hootsuite は採用していません（将来乗り換える可能性は残します）。
 
 第1弾は Instagram（[`instagram/`](instagram/)）。今後 X・LINE公式 などを増やす想定なので、**SNSごとにディレクトリを並べる**構成にしています。
 
@@ -28,7 +30,7 @@
 | 3 | 機械チェックする | `python3 instagram/build-posts.py` | 指摘が出たら投稿案を直して再実行する |
 | 4 | 目視チェックする | ― | `instagram/out/review.md` を開き、事実・トーン・法定表記を人が確認する |
 | 5 | 画像をつくる | ― | ブランドの配色で画像を用意する |
-| 6 | 予約投稿する | ― | `instagram/out/schedule.csv` と `captions/` を SNS管理ツールに流し込み、予約する |
+| 6 | 予約投稿する | ― | `instagram/out/schedule.csv` と `captions/` をもとに、**Meta Business Suite** で予約する |
 
 ステップ2・4・6は人の判断が要る工程です。ここを飛ばさないことが、この運用の前提になっています。
 
@@ -47,7 +49,7 @@ python3 instagram/build-posts.py
 `--prompt` に渡すブランド名は `brand-ritz` / `next-platinum` / `iroishi-market` の3つです。
 
 - Instagram運用の詳しい手順 → **[`instagram/README.md`](instagram/README.md)**（正本）
-- 環境の準備・SNS管理ツール側の初期設定 → **[`SETUP.md`](SETUP.md)**
+- 環境の準備・Meta Business Suite 側の初期設定 → **[`SETUP.md`](SETUP.md)**
 - ブランドの前提条件・守るルール（Claude が作業前に読む） → **[`CLAUDE.md`](CLAUDE.md)**
 
 ---
@@ -83,7 +85,8 @@ python3 instagram/build-posts.py
 - **ブランドをまたいで配色・トーンを混ぜない。** BtoC（ブランドリッツ）は親しみやすく安心感、BtoB（ネクストプラチナム・色石マーケット）は専門家同士の対等な語り口。配色も `accounts.json` のブランド別の値を使う
 - **取扱外の品目に触れない。** 対象品目の線引きは `accounts.json` の `common.out_of_scope_items` が正。この線引きは競合紙面 [`Lear0511/Riuz-newspoper`](https://github.com/Lear0511/Riuz-newspoper) と共有しているので、**対象外品目を足すときは両リポジトリに反映する**
 - **未確認のアカウント名を推測で埋めない。** ネクストプラチナムと色石マーケットの Instagram は brand-kit に記載がなく、`accounts.json` では `null` のまま。実アカウントを確認してから `handle` / `url` に入れる
-- **Instagram Graph API は使わない。** 予約投稿は SNS管理ツール（Meta Business Suite / Buffer / Later / Hootsuite）側で行う
+- **ハッシュタグは既定でキャプション本文に入れる。** Meta Business Suite には1件目のコメントを自動投稿する機能が無いため、投稿バッチの `hashtag_placement` の既定は `caption`。`first_comment` を指定した投稿は検証で WARN が出て、公開後に人が手でコメントを入れる運用になる
+- **Instagram Graph API は使わない。** 予約投稿は Meta Business Suite 側で行う
 
 ---
 

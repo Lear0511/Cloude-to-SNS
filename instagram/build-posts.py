@@ -24,6 +24,12 @@ ROOT = pathlib.Path(__file__).resolve().parent
 JST = timezone(timedelta(hours=9), 'JST')
 ERROR, WARN = 'ERROR', 'WARN'
 TYPES = ('carousel', 'single', 'reel')
+PLACEMENTS = ('caption', 'first_comment')
+
+# 予約投稿ツール。Meta Business Suite は1件目のコメントを自動投稿できないため、
+# ハッシュタグはキャプション本文に入れるのを既定にする（手作業の入れ忘れ事故を防ぐ）。
+POSTING_TOOL = 'Meta Business Suite'
+HASHTAG_PLACEMENT_DEFAULT = 'caption'
 
 # 記号を除いた実質の本文でNG語を見るための正規化
 def norm(s):
@@ -31,7 +37,13 @@ def norm(s):
 
 
 def load_accounts():
-    return json.loads((ROOT / 'accounts.json').read_text(encoding='utf-8'))
+    accounts = json.loads((ROOT / 'accounts.json').read_text(encoding='utf-8'))
+    # 既定値の正本は accounts.json 側。未設定ならスクリプトの定数で補う。
+    global POSTING_TOOL, HASHTAG_PLACEMENT_DEFAULT
+    POSTING_TOOL = accounts['common'].get('posting_tool', POSTING_TOOL)
+    HASHTAG_PLACEMENT_DEFAULT = accounts['common']['limits'].get(
+        'hashtag_placement_default', HASHTAG_PLACEMENT_DEFAULT)
+    return accounts
 
 
 def parse_at(s):
@@ -45,10 +57,19 @@ def hashtags_of(post):
     return [h for h in post.get('hashtags', []) if h.strip()]
 
 
+def placement_of(post):
+    """ハッシュタグの置き場所。省略時は HASHTAG_PLACEMENT_DEFAULT（caption）。"""
+    return post.get('hashtag_placement') or HASHTAG_PLACEMENT_DEFAULT
+
+
+def caption_filename(post):
+    return f'{str(post.get("id", "00")).zfill(2)}-{post.get("slug", "post")}.txt'
+
+
 def caption_full(post):
     """キャプション欄に実際に入る文字列。ハッシュタグの置き場所で変わる。"""
     body = post.get('caption', '')
-    if post.get('hashtag_placement', 'first_comment') == 'caption':
+    if placement_of(post) == 'caption':
         tags = ' '.join(hashtags_of(post))
         return f'{body}\n\n{tags}' if tags else body
     return body
@@ -56,7 +77,7 @@ def caption_full(post):
 
 def first_comment_full(post):
     parts = [post.get('first_comment', '').strip()]
-    if post.get('hashtag_placement', 'first_comment') == 'first_comment':
+    if placement_of(post) == 'first_comment':
         parts.append(' '.join(hashtags_of(post)))
     return '\n\n'.join(p for p in parts if p)
 
@@ -131,6 +152,15 @@ def validate(batch, accounts):
         if missing:
             add(WARN, pid, f'固定ハッシュタグが入っていない: {", ".join(missing)}')
 
+        placement = placement_of(post)
+        if placement not in PLACEMENTS:
+            add(ERROR, pid, f'hashtag_placement は {"/".join(PLACEMENTS)} のいずれか'
+                            f'（今: {post.get("hashtag_placement")!r}）')
+        elif placement == 'first_comment':
+            add(WARN, pid, f'hashtag_placement が first_comment。{POSTING_TOOL} は1件目のコメントを'
+                           '自動投稿できないため、公開後に手で入れる運用になる'
+                           f'（既定は {HASHTAG_PLACEMENT_DEFAULT}）')
+
         # スライド
         slides = post.get('slides') or []
         if post.get('type') == 'carousel':
@@ -172,7 +202,7 @@ def validate(batch, accounts):
     return out
 
 
-def render_review(batch, accounts, issues):
+def render_review(batch, accounts, issues, name):
     acc = accounts['accounts'][batch['account']]
     lim = accounts['common']['limits']
     handle = acc.get('handle') or '（アカウント未設定）'
@@ -213,7 +243,7 @@ def render_review(batch, accounts, issues):
         L.append('')
         L.append(f'- 予約日時（JST）: **{post.get("publish_at", "-")}**')
         L.append(f'- 形式: {post.get("type", "-")}／{len(post.get("slides") or [])}枚')
-        L.append(f'- ハッシュタグ: {len(hashtags_of(post))}個（{post.get("hashtag_placement", "first_comment")} に置く）')
+        L.append(f'- ハッシュタグ: {len(hashtags_of(post))}個（{placement_of(post)} に置く）')
         cap = caption_full(post)
         L.append(f'- キャプション: {len(cap)}字 / {lim["caption_max"]}字')
         L.append('')
@@ -227,6 +257,29 @@ def render_review(batch, accounts, issues):
             L.append('')
 
         slides = post.get('slides') or []
+        n = len(slides)
+        placement = placement_of(post)
+        upload = (f'画像をカルーセルの順（1枚目→{n}枚目）どおりにアップロードする'
+                  if n >= 2 else '画像をアップロードする（1枚）')
+        if placement == 'first_comment':
+            last = ('この投稿は hashtag_placement が first_comment。'
+                    '公開後に下の「1件目のコメント」を手で入れる（自動投稿されない）')
+        elif post.get('first_comment', '').strip():
+            last = ('ハッシュタグはキャプションに入っている。'
+                    '下の「1件目のコメント」の注記だけ、公開後に手で入れる')
+        else:
+            last = ('ハッシュタグはキャプションに入っているので、'
+                    '公開後に手で入れるコメントは無い')
+        L.append(f'### {POSTING_TOOL} への入れ方')
+        L.append('')
+        L.append(f'1. プランナー →「投稿を作成」→ {handle} を選ぶ')
+        L.append(f'2. {upload}')
+        L.append(f'3. `out/{name}-captions/{caption_filename(post)}` の本文をキャプション欄に貼る')
+        L.append('4. 画像ごとに下の「画像の指示」表の alt を代替テキストに入れる')
+        L.append(f'5. 予約日時に **{post.get("publish_at", "-")}（JST）** を設定する')
+        L.append(f'6. {last}')
+        L.append('')
+
         if slides:
             L.append('### 画像の指示')
             L.append('')
@@ -292,7 +345,7 @@ def render_captions(batch, outdir):
     for old in outdir.glob('*.txt'):
         old.unlink()
     for post in batch.get('posts', []):
-        name = f'{str(post.get("id", "00")).zfill(2)}-{post.get("slug", "post")}.txt'
+        name = caption_filename(post)
         text = caption_full(post)
         fc = first_comment_full(post)
         if fc:
@@ -311,6 +364,7 @@ Instagram 運用担当です。次の前提条件だけを使って、投稿案�
 - 当社の取扱外の品目に触れない: {oos}
 - 前提条件に無い事実（店舗名・数値・キャンペーン・許可番号）を書かない
 - ハッシュタグは合計 {hashtag_max} 個まで。キャプションは {caption_max} 字まで
+- ハッシュタグはキャプション末尾にまとめて置く（予約投稿に使う {posting_tool} は1件目のコメントを自動投稿できないため）
 
 【投稿の型（ここから選ぶ。同じ型を続けない）】
 {pillars}
@@ -339,7 +393,7 @@ Instagram 運用担当です。次の前提条件だけを使って、投稿案�
            "alt": "画像の代替テキスト（100字まで・何が写っているかを説明）" }}
       ],
       "caption": "本文。1文ずつ改行して読みやすくする。最後に CTA を置く",
-      "hashtag_placement": "first_comment",
+      "hashtag_placement": "caption",
       "hashtags": ["#..."],
       "first_comment": "補足があれば。無ければ空文字",
       "media": [],
@@ -374,6 +428,7 @@ def build_prompt(accounts, key, count, start):
         ng='／'.join(ng),
         oos='／'.join(common['out_of_scope_items']),
         hashtag_max=common['limits']['hashtag_max'],
+        posting_tool=POSTING_TOOL,
         caption_max=common['limits']['caption_max'],
         pillars='\n'.join(f'- {p}' for p in acc['pillars']),
         schedule=schedule,
@@ -429,7 +484,7 @@ def main():
             print(f'   → --strict のため出力しない: {path.name}')
             continue
 
-        (outdir / f'{name}-review.md').write_text(render_review(batch, accounts, issues), encoding='utf-8')
+        (outdir / f'{name}-review.md').write_text(render_review(batch, accounts, issues, name), encoding='utf-8')
         render_csv(batch, accounts, outdir / f'{name}-schedule.csv')
         render_captions(batch, outdir / f'{name}-captions')
         print(f'   → {name}-review.md / {name}-schedule.csv / {name}-captions/')

@@ -56,8 +56,19 @@ BtoB（ネクストプラチナム・色石マーケット）は専門家同士�
 
 ### Instagram Graph API は使わない
 
-アカウント停止リスクを避け、公開前に必ず目視を挟むため。予約投稿は SNS管理ツール
-（Meta Business Suite / Buffer / Later / Hootsuite）に任せる。
+アカウント停止リスクを避け、公開前に必ず目視を挟むため。
+**予約投稿は Meta Business Suite で行う**（2026-08-28 オーナー判断・無料。Buffer / Later / Hootsuite は不採用。
+将来の乗り換えの可能性は残す）。
+
+**Meta Business Suite には1件目のコメントを自動投稿する機能が無い。**
+そのため `hashtag_placement` の既定は `first_comment` から **`caption`**（キャプション本文）へ変更した。
+`first_comment` を指定した投稿は検証で WARN が出て、公開後に人が手でコメントを入れる運用になる。
+
+Meta Business Suite で扱うには、Instagram がプロアカウント（ビジネス／クリエイター）で、
+Facebook ページと連携されている必要がある。ネクストプラチナムと色石マーケットは実アカウントが未確認のため、
+**運用開始前にアカウントの特定とプロアカウント化・ページ連携の確認が要る**（手順は `SETUP.md`）。
+管理画面の細かい仕様（予約できる期間・件数の上限、カルーセルの最大枚数、alt の設定場所など）は
+**未確認なので推測で書かない。** 必要なら実機で確認してから書く。
 
 ### 生成物をコミットして残す
 
@@ -73,6 +84,7 @@ python3 instagram/build-posts.py --strict                         # WARN もエ�
 ```
 
 **ERROR があるバッチは出力されない。** 直してから再実行する。
+**`hashtag_placement` に `first_comment` を指定すると WARN が出る**（Meta Business Suite が1件目のコメントを自動投稿できないため。既定は `caption`）。
 検証で落とすもの: キャプション2,200字／ハッシュタグ30個・重複・`#`始まり／カルーセル2〜20枚／
 alt必須／`publish_at` の書式・過去日／断定・優良誤認のNG表現／取扱外品目への言及。
 
