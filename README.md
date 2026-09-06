@@ -15,7 +15,7 @@
 |---|---|---|
 | ブランドリッツ | BtoC 買取・販売 | `@brand_ritz` / `@brandritzbuy` / `@brandritzrokko` |
 | ネクストプラチナム | BtoB 貴金属卸・買取 | **未確認**（推測で埋めない） |
-| 色石マーケット | BtoB 色石の業者間卸・仕入 | **未確認**（推測で埋めない） |
+| 色石マーケット | BtoB 色石の業者間卸・仕入 | `@iroishi.market` |
 
 ---
 
@@ -84,7 +84,7 @@ python3 instagram/build-posts.py
 - **事実は brand-kit のみを出典にする。** 住所・数値・人名・許可番号・実績は [`Lear0511/Riuz-base`](https://github.com/Lear0511/Riuz-base) の brand-kit を唯一の出典とし、投稿で創作しない
 - **ブランドをまたいで配色・トーンを混ぜない。** BtoC（ブランドリッツ）は親しみやすく安心感、BtoB（ネクストプラチナム・色石マーケット）は専門家同士の対等な語り口。配色も `accounts.json` のブランド別の値を使う
 - **取扱外の品目に触れない。** 対象品目の線引きは `accounts.json` の `common.out_of_scope_items` が正。この線引きは競合紙面 [`Lear0511/Riuz-newspoper`](https://github.com/Lear0511/Riuz-newspoper) と共有しているので、**対象外品目を足すときは両リポジトリに反映する**
-- **未確認のアカウント名を推測で埋めない。** ネクストプラチナムと色石マーケットの Instagram は brand-kit に記載がなく、`accounts.json` では `null` のまま。実アカウントを確認してから `handle` / `url` に入れる
+- **未確認のアカウント名を推測で埋めない。** ネクストプラチナムの Instagram は未確認のまま（`accounts.json` では `null`）。実アカウントを確認してから `handle` / `url` に入れる。色石マーケットは 2026-09-06 にオーナー提供の一次情報で確認できたので記入済み
 - **ハッシュタグは既定でキャプション本文に入れる。** Meta Business Suite には1件目のコメントを自動投稿する機能が無いため、投稿バッチの `hashtag_placement` の既定は `caption`。`first_comment` を指定した投稿は検証で WARN が出て、公開後に人が手でコメントを入れる運用になる
 - **Instagram Graph API は使わない。** 予約投稿は Meta Business Suite 側で行う
 

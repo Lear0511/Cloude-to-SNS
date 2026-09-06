@@ -108,15 +108,16 @@ python3 instagram/build-posts.py
 ```
 ── 2026-09-01-brand-ritz.json  投稿 4本 / ERROR 0 / WARN 0
    → 2026-09-01-brand-ritz-review.md / 2026-09-01-brand-ritz-schedule.csv / 2026-09-01-brand-ritz-captions/
-── 2026-09-02-iroishi-market.json  投稿 2本 / ERROR 0 / WARN 1
-   [WARN] #- 色石マーケット の Instagram handle が accounts.json 未設定。運用開始前に実アカウントを確認して埋めること
+── 2026-09-02-iroishi-market.json  投稿 2本 / ERROR 0 / WARN 0
    → 2026-09-02-iroishi-market-review.md / 2026-09-02-iroishi-market-schedule.csv / 2026-09-02-iroishi-market-captions/
 ── 2026-09-02-next-platinum.json  投稿 2本 / ERROR 0 / WARN 1
    [WARN] #- ネクストプラチナム の Instagram handle が accounts.json 未設定。運用開始前に実アカウントを確認して埋めること
    → 2026-09-02-next-platinum-review.md / 2026-09-02-next-platinum-schedule.csv / 2026-09-02-next-platinum-captions/
 ```
 
-**ネクストプラチナムと色石マーケットに WARN が1件ずつ出るのは正常です。** この2ブランドは Instagram の実アカウントが未確認のため、`instagram/accounts.json` の `handle` を空にしてあります。推測で埋めず、実アカウントを確認できてから入れてください。WARN は出力を止めません（ファイルは生成されます）。
+**ネクストプラチナムに WARN が1件出るのは正常です。** このブランドは Instagram の実アカウントが未確認のため、`instagram/accounts.json` の `handle` を空にしてあります。推測で埋めず、実アカウントを確認できてから入れてください。WARN は出力を止めません（ファイルは生成されます）。
+
+色石マーケットは 2026-09-06 に実アカウント（`@iroishi.market`）を確認して記入済みなので、この WARN は出ません。
 
 出力されるファイルは1バッチにつき3種類です。
 
@@ -126,7 +127,7 @@ python3 instagram/build-posts.py
 | `<バッチ名>-schedule.csv` | 予約投稿の元データ（1投稿1行）。Meta Business Suite で予約するときに見る |
 | `<バッチ名>-captions/NN-*.txt` | キャプション全文。手貼り用にコピペするだけ |
 
-参考: `--strict` を付けると WARN もエラー扱いになり、そのバッチは出力されません（PR前の厳格チェック用）。現状は上記の handle 未設定 WARN があるため、`--strict` は途中で止まります。日常の実行では付けないでください。
+参考: `--strict` を付けると WARN もエラー扱いになり、そのバッチは出力されません（PR前の厳格チェック用）。現状はネクストプラチナムの handle 未設定 WARN があるため、`--strict` はそのバッチで止まります。日常の実行では付けないでください。
 
 ---
 
@@ -226,12 +227,12 @@ ls instagram/out/
 | `zsh: command not found: python3` | Python 3 が入っていない | `xcode-select --install` で Xcode Command Line Tools を入れる |
 | `zsh: command not found: git` | git が入っていない | 同じく `xcode-select --install` を実行する |
 | `ERROR` が出て、そのバッチのファイルが生成されない | 仕様。検証に落ちたバッチは出力しない（不完全な投稿をそのまま流さないため） | 画面に出た `[ERROR] #<投稿番号> <内容>` を読み、`instagram/posts/` の該当 JSON を直してから再実行する |
-| `WARN` が出るがファイルは生成される | 仕様。WARN は出力を止めない | 内容を確認する。ネクストプラチナム／色石マーケットの handle 未設定 WARN は現時点では正常 |
+| `WARN` が出るがファイルは生成される | 仕様。WARN は出力を止めない | 内容を確認する。ネクストプラチナムの handle 未設定 WARN は現時点では正常 |
 | `--strict` を付けたら `→ --strict のため出力しない` で止まる | `--strict` は WARN もエラー扱いにする | 日常の実行では `--strict` を付けない |
 | `処理する投稿バッチが無い（instagram/posts/*.json）` | `instagram/posts/` に JSON が1つも無い | Web版 Claude から返ってきた JSON を `instagram/posts/` に保存してから実行する |
 | `account "..." が無い` | `--prompt` に渡した名前が違う | `brand-ritz` / `next-platinum` / `iroishi-market` のいずれかを指定する |
 | Meta Business Suite に該当の Instagram アカウントが出てこない | プロアカウント（ビジネス／クリエイター）になっていない、または Facebook ページと連携できていない | 「7. Meta Business Suite 側の準備」を先に済ませる |
-| ネクストプラチナム／色石マーケットを予約しようとしたが、どのアカウントか分からない | 実アカウントが未確認で `instagram/accounts.json` の `handle` が空のまま | 実アカウントを特定してから `handle` / `url` を埋める。推測で埋めない |
+| ネクストプラチナムを予約しようとしたが、どのアカウントか分からない | 実アカウントが未確認で `instagram/accounts.json` の `handle` が空のまま | 実アカウントを特定してから `handle` / `url` を埋める。推測で埋めない |
 | 公開された投稿の1件目のコメントにハッシュタグが入っていない | Meta Business Suite には1件目のコメントを自動投稿する機能が無い | ハッシュタグはキャプション本文に入れる（`hashtag_placement` の既定は `caption`）。`first_comment` の中身は公開後に手でコメントする |
 
 ### 迷ったら最初に確認する2つ
@@ -273,10 +274,12 @@ ls instagram/
 |---|---|---|
 | 1 | 3ブランドの Instagram を**プロアカウント**（ビジネス／クリエイター）にする | Instagram アプリの設定でプロアカウントに切り替わっている |
 | 2 | 各アカウントを**Facebook ページと連携**する | Meta Business Suite から、そのアカウントの投稿を作成・予約できる |
-| 3 | ネクストプラチナムと色石マーケットの**実アカウントを特定**する | `instagram/accounts.json` の `handle` / `url` が埋まり、手順3の WARN が消えている |
+| 3 | ネクストプラチナムの**実アカウントを特定**する（色石マーケットは 2026-09-06 に特定済み） | `instagram/accounts.json` の `handle` / `url` が埋まり、手順3の WARN が消えている |
 | 4 | **予約・公開する担当者を決める**（誰がやるか、権限を誰に渡すか） | 担当者のアカウントに、3ブランドぶんの権限が割り当たっている |
 
-**3 は推測で埋めないでください。** ネクストプラチナムと色石マーケットの Instagram は brand-kit に記載が無く、`accounts.json` では空のままにしてあります。実アカウントを確認できるまでは WARN が出続けるのが正しい状態です（手順3の説明を参照）。
+**3 は推測で埋めないでください。** ネクストプラチナムの Instagram は brand-kit に記載が無く、`accounts.json` では空のままにしてあります。実アカウントを確認できるまでは WARN が出続けるのが正しい状態です（手順3の説明を参照）。
+
+色石マーケット（`@iroishi.market`）は手順3を済ませましたが、**手順1・2（プロアカウント化と Facebook ページ連携）は未確認**です。予約投稿の前に Meta Business Suite で実際に選べるか確かめてください。
 
 ### ハッシュタグの扱い
 

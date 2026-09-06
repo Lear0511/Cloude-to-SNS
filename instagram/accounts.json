@@ -117,9 +117,9 @@
     "iroishi-market": {
       "brand": "色石マーケット",
       "type": "BtoB",
-      "handle": null,
-      "url": null,
-      "_handle_note": "brand-kit に Instagram の記載なし。運用開始前に実アカウントを確認して handle / url を埋める(推測で入れない)。",
+      "handle": "@iroishi.market",
+      "url": "https://www.instagram.com/iroishi.market/",
+      "_handle_note": "実アカウントはオーナー提供のスクリーンショット(2026-09-06)で確認して記入。表示名「色石マーケット｜業者様専用 色石買取」／カテゴリ「ショッピング・小売り」／投稿数 0(2026-09-06 時点)。プロフィール文は末尾が省略表示のため全文不明で、ここには写さない。プロアカウント(ビジネス/クリエイター)化と Facebook ページ連携は未確認。brand-kit には未記載のため、そちらへの反映は別途行う。",
       "site": "https://iroishi-market.com/",
       "catchcopy": "どんなルースでも値段がつきます",
       "sub_accounts": [],
