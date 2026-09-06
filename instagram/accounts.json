@@ -4,8 +4,9 @@
 
   "common": {
     "company": "株式会社Ritz Solution Partner",
-    "tagline": "人から人へ渡る喜びを",
-    "mission": "リユース業を通じてすべての人に、新たな価値観、新たな発見、新たな喜びを提供",
+    "mission": "私たちは、リユース業を通じてすべての人に、新たな価値観、新たな発見、新たな喜びを提供します。",
+    "vision": "私たちは、使われなくなったモノに新たな価値を与え循環させることで、持続可能な社会の実現を目指します。",
+    "_corporate_line_note": "【2026-09-06 オーナー指示】コーポレート共通のタグラインは持たない。「人から人へ渡る喜びを」はブランドリッツ(BtoC)のキャッチコピーで、値は accounts.brand-ritz.catchcopy にある。社名(株式会社Ritz Solution Partner)の後ろにこの一文を並べて書かないこと。会社としての一文が要る場合は上の mission / vision を一字一句変えずに使う(原典: 会社案内パンフレット。出典 Riuz-base brand-kit.json parentCompany.taglineNote / philosophy・2026-09-06 参照)。",
     "timezone": "Asia/Tokyo",
     "posting_tool": "Meta Business Suite",
     "_posting_tool_note": "予約投稿は Meta Business Suite で行う(オーナー判断・変更不可)。Buffer / Later / Hootsuite は採用しない(将来の乗り換えは残す)。Meta Business Suite は1件目のコメントを自動投稿できず、公開後に人が手で入れる必要がある。入れ忘れの事故を避けるため hashtag_placement の既定は caption(キャプション末尾にまとめて置く)とする。first_comment を指定した投稿は build-posts.py が WARN を出す。",
@@ -44,6 +45,7 @@
       "url": "https://www.instagram.com/brand_ritz/",
       "site": "https://brand-ritz.com/",
       "catchcopy": "人から人へ渡る喜びを『ブランドリッツ』",
+      "_catchcopy_note": "【2026-09-06 オーナー指示】このキャッチコピーはブランドリッツ(BtoC)のものであり、株式会社Ritz Solution Partner のコーポレートタグラインではない。社名と並べて書かない。他ブランド(ネクストプラチナム・色石マーケット)の投稿に転用しない。正本は Riuz-base brand-kit.json brands[brand-ritz].tagline。",
       "sub_accounts": [
         { "handle": "@brandritzbuy", "url": "https://www.instagram.com/brandritzbuy/", "role": "買取訴求(全店共通)" },
         { "handle": "@brandritzrokko", "url": "https://www.instagram.com/brandritzrokko/", "role": "JR六甲道駅前店の店舗個別" }
