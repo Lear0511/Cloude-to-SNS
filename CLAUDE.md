@@ -45,7 +45,7 @@
 
 | ブランド | ハンドル | 出典 |
 |---|---|---|
-| ブランドリッツ | `@brand_ritz` / `@brandritzbuy` / `@brandritzrokko` | brand-kit |
+| ブランドリッツ | `@brand_ritz` / `@brand_ritz_kaitori` / `@brandritzrokko` | brand-kit |
 | ネクストプラチナム | `@next.platinum` | 公式サイトのSNS欄のQRコード画像。画像下部にハンドルが印字されている |
 | 色石マーケット | `@iroishi.market` | オーナー提供のスクリーンショット |
 

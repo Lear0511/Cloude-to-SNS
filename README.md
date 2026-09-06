@@ -13,7 +13,7 @@
 
 | ブランド | 種別 | Instagram |
 |---|---|---|
-| ブランドリッツ | BtoC 買取・販売 | `@brand_ritz` / `@brandritzbuy` / `@brandritzrokko` |
+| ブランドリッツ | BtoC 買取・販売 | `@brand_ritz` / `@brand_ritz_kaitori` / `@brandritzrokko` |
 | ネクストプラチナム | BtoB 貴金属卸・買取 | `@next.platinum` |
 | 色石マーケット | BtoB 色石の業者間卸・仕入 | `@iroishi.market` |
 

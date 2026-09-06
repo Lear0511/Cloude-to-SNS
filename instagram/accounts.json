@@ -47,9 +47,10 @@
       "catchcopy": "人から人へ渡る喜びを『ブランドリッツ』",
       "_catchcopy_note": "【2026-09-06 オーナー指示】このキャッチコピーはブランドリッツ(BtoC)のものであり、株式会社Ritz Solution Partner のコーポレートタグラインではない。社名と並べて書かない。他ブランド(ネクストプラチナム・色石マーケット)の投稿に転用しない。正本は Riuz-base brand-kit.json brands[brand-ritz].tagline。",
       "sub_accounts": [
-        { "handle": "@brandritzbuy", "url": "https://www.instagram.com/brandritzbuy/", "role": "買取訴求(全店共通)" },
+        { "handle": "@brand_ritz_kaitori", "url": "https://www.instagram.com/brand_ritz_kaitori/", "role": "買取訴求" },
         { "handle": "@brandritzrokko", "url": "https://www.instagram.com/brandritzrokko/", "role": "JR六甲道駅前店の店舗個別" }
       ],
+      "_sub_accounts_note": "【2026-09-06 オーナー確認】買取アカウントの正は @brand_ritz_kaitori(https://www.instagram.com/brand_ritz_kaitori/)。従来ここに書いていた @brandritzbuy は誤りなので削除した ── 実在はするが最終投稿 2023-08-10 で約3年休止(フォロワー1,076/投稿12件/推定ER 0.2%)、フォロワー監査で約半数がボット判定、公式サイトのミラーにも Instagram のリンクが1本も無い。この実測記録は Lear0511/Riuz-Instagram にあるが、1,076フォロワーという数字だけを見て @brandritzbuy を復活させないこと。@brand_ritz_kaitori 側のフォロワー数・投稿数・プロフィール文は未確認(Instagram を未認証で開けないため)。推測で埋めない。旧 role の『(全店共通)』は旧アカウントに紐づく未確認の属性なので引き継いでいない。",
       "audience": "ブランド品・貴金属を売りたい一般消費者(神戸・阪神間)。20代〜70代、主婦・会社員・経営者・退職者",
       "tone": "誠実で親しみやすい。価値・信頼・利便性。『迷わずブランドリッツ』。煽らない・不透明にしない",
       "colors": { "primary": "#E96081", "gold": "#F5B32D", "blue": "#3B82C5", "bg": "#DFEFF8", "subtext": "#A8A4A1", "text": "#3E3A39" },

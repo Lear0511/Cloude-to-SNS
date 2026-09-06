@@ -14,7 +14,7 @@ API 連携を持たないぶんアカウント停止のリスクが小さく、�
 
 | ブランド | 種別 | アカウント | 投稿頻度の目安 |
 |---|---|---|---|
-| ブランドリッツ | BtoC | [@brand_ritz](https://www.instagram.com/brand_ritz/)（本体）／[@brandritzbuy](https://www.instagram.com/brandritzbuy/)（買取）／[@brandritzrokko](https://www.instagram.com/brandritzrokko/)（六甲道店） | 週4本 19:00 |
+| ブランドリッツ | BtoC | [@brand_ritz](https://www.instagram.com/brand_ritz/)（本体）／[@brand_ritz_kaitori](https://www.instagram.com/brand_ritz_kaitori/)（買取）／[@brandritzrokko](https://www.instagram.com/brandritzrokko/)（六甲道店） | 週4本 19:00 |
 | ネクストプラチナム | BtoB | [@next.platinum](https://www.instagram.com/next.platinum/) | 週2本 12:00 |
 | 色石マーケット | BtoB | [@iroishi.market](https://www.instagram.com/iroishi.market/) | 週2本 12:00 |
 

@@ -33,9 +33,9 @@ Instagram 運用担当です。次の前提条件だけを使って、投稿案�
   "catchcopy": "人から人へ渡る喜びを『ブランドリッツ』",
   "sub_accounts": [
     {
-      "handle": "@brandritzbuy",
-      "url": "https://www.instagram.com/brandritzbuy/",
-      "role": "買取訴求(全店共通)"
+      "handle": "@brand_ritz_kaitori",
+      "url": "https://www.instagram.com/brand_ritz_kaitori/",
+      "role": "買取訴求"
     },
     {
       "handle": "@brandritzrokko",
