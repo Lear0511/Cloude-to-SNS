@@ -14,12 +14,15 @@ API 連携を持たないぶんアカウント停止のリスクが小さく、�
 
 | ブランド | 種別 | アカウント | 投稿頻度の目安 |
 |---|---|---|---|
-| ブランドリッツ | BtoC | [@brand_ritz](https://www.instagram.com/brand_ritz/)（本体）／[@brandritzbuy](https://www.instagram.com/brandritzbuy/)（買取）／[@brandritzrokko](https://www.instagram.com/brandritzrokko/)（六甲道店） | 週4本 19:00 |
-| ネクストプラチナム | BtoB | **未設定** | 週2本 12:00 |
-| 色石マーケット | BtoB | **未設定** | 週2本 12:00 |
+| ブランドリッツ | BtoC | [@brand_ritz](https://www.instagram.com/brand_ritz/)（本体）／[@brand_ritz_kaitori](https://www.instagram.com/brand_ritz_kaitori/)（買取）／[@brandritzrokko](https://www.instagram.com/brandritzrokko/)（六甲道店） | 週4本 19:00 |
+| ネクストプラチナム | BtoB | [@next.platinum](https://www.instagram.com/next.platinum/) | 週2本 12:00 |
+| 色石マーケット | BtoB | [@iroishi.market](https://www.instagram.com/iroishi.market/) | 週2本 12:00 |
 
-ネクストプラチナムと色石マーケットの Instagram は brand-kit に記載が無い。
-**実アカウントを確認して `accounts.json` の `handle` / `url` を埋めるまで、この2ブランドは検証時に WARN が出続ける**（推測で埋めないこと）。
+BtoB の2ブランドは 2026-09-06 に一次情報で確認し、`accounts.json` に記入済み（ハンドル未設定の WARN は解消）。
+色石マーケットはオーナー提供のスクリーンショット、ネクストプラチナムは公式サイトのSNS欄に掲出された
+QR コード画像（画像下部にハンドル「NEXT.PLATINUM」が印字されている）が出典。
+
+**どちらもプロアカウント（ビジネス／クリエイター）か否かと Facebook ページ連携は未確認**なので、予約投稿の前に実機で確かめること。
 
 ## 全体の流れ
 
@@ -190,7 +193,7 @@ publish_at_jst, account, handle, type, theme, caption, first_comment, media, alt
 
 - **事実は brand-kit だけを出典にする。** 住所・数値・人名・実績・許可番号を創作しない。新しい事実が要るときは brand-kit 側を更新してから使う
 - **ブランドをまたいで配色・トーンを混ぜない。** BtoC（ブランドリッツ）は親しみやすく安心感、BtoB（ネクストプラチナム・色石マーケット）は専門家同士の対等な語り口
-- **取扱外の品目に触れない。** 衣類・古着・PC・スマホ・ゲーム・トレカ・家電・楽器など（全リストは `accounts.json`）
+- **取扱外の品目に触れない。** ノーブランドの古着・アパレル、PC・スマホ・ゲーム・トレカ・家電・楽器など（全リストは `accounts.json`）。**ブランド衣類は取扱品目なので書いてよい**（2026-09-06 オーナー判断）
 - **投稿の型を続けて同じにしない。** `accounts.json` の `pillars` から回す
 - 生成済みバッチと出力は `posts/` `out/` にコミットして残す。何をいつ出したかの記録になる
 

@@ -4,8 +4,9 @@
 
   "common": {
     "company": "株式会社Ritz Solution Partner",
-    "tagline": "人から人へ渡る喜びを",
-    "mission": "リユース業を通じてすべての人に、新たな価値観、新たな発見、新たな喜びを提供",
+    "mission": "私たちは、リユース業を通じてすべての人に、新たな価値観、新たな発見、新たな喜びを提供します。",
+    "vision": "私たちは、使われなくなったモノに新たな価値を与え循環させることで、持続可能な社会の実現を目指します。",
+    "_corporate_line_note": "【2026-09-06 オーナー指示】コーポレート共通のタグラインは持たない。「人から人へ渡る喜びを」はブランドリッツ(BtoC)のキャッチコピーで、値は accounts.brand-ritz.catchcopy にある。社名(株式会社Ritz Solution Partner)の後ろにこの一文を並べて書かないこと。会社としての一文が要る場合は上の mission / vision を一字一句変えずに使う(原典: 会社案内パンフレット。出典 Riuz-base brand-kit.json parentCompany.taglineNote / philosophy・2026-09-06 参照)。",
     "timezone": "Asia/Tokyo",
     "posting_tool": "Meta Business Suite",
     "_posting_tool_note": "予約投稿は Meta Business Suite で行う(オーナー判断・変更不可)。Buffer / Later / Hootsuite は採用しない(将来の乗り換えは残す)。Meta Business Suite は1件目のコメントを自動投稿できず、公開後に人が手で入れる必要がある。入れ忘れの事故を避けるため hashtag_placement の既定は caption(キャプション末尾にまとめて置く)とする。first_comment を指定した投稿は build-posts.py が WARN を出す。",
@@ -25,11 +26,15 @@
     ],
     "_ng_words_note": "景品表示法の優良誤認・古物営業法まわりの断定表現。ブランド公式のキャッチコピーは account.ng_allow で個別に解除する。",
     "out_of_scope_items": [
-      "衣類", "古着", "アパレル", "ユニクロ", "PC", "パソコン", "スマホ", "スマートフォン", "iPhone",
+      "ノーブランド古着", "ノーブランドの古着", "ノーブランド衣類", "ノーブランドの衣類",
+      "ノーブランドのアパレル", "古着屋", "古着買取", "古着の買取", "ファストファッション", "ユニクロ",
+      "PC", "パソコン", "スマホ", "スマートフォン", "iPhone",
       "タブレット", "携帯電話", "ゲーム", "フィギュア", "おもちゃ", "トレカ", "トレーディングカード",
       "古本", "家電", "家具", "バイク用品", "楽器", "和楽器"
     ],
-    "_out_of_scope_note": "競合デイリー紙面リポジトリ Lear0511/Riuz-newspoper の CLAUDE.md「掲載範囲 ── ブランドリッツの取扱品目に関わる動きだけ」と同じ判定。紙面と投稿で品目の線引きを揃えるため共有する。新しい品目が出たら両リポジトリに足す。"
+    "_out_of_scope_note": "【2026-09-06 オーナー判断】ブランド衣類は取扱品目(公式サイトの専用ページ /brandiryou/・brand-kit の21品目に収録)。対象外は「ノーブランドの古着・アパレル」だけに絞る。なお「ノーブランドの古着を扱わない」は一次情報ではなくオーナー判断である ── 公式サイトのミラー全文に「古着」「ノーブランド」は1件も無い(2026-09-06 実測)ので、事実として断定しないこと。",
+    "_out_of_scope_matching_note": "build-posts.py は norm() で空白を潰したうえで部分一致させ ERROR にする。そのため広い語を置けない ── 「衣類」は「ブランド衣類」を、「アパレル」は「高級アパレルメーカー」を、「古着」は「中古着物」「中古 着物」を巻き込んで正当な投稿を落とす(実測で誤検知9件)。ノーブランドを名指しする語に絞ってあるのはこのため。語を足すときは既存の取扱21品目に部分一致しないか必ず確かめる。",
+    "_out_of_scope_shared_note": "この線引きは競合デイリー紙面リポジトリ Lear0511/Riuz-newspoper の CLAUDE.md「掲載範囲 ── ブランドリッツの取扱品目に関わる動きだけ」および riuz-daily/rebuild-log.py の NG と一致させる。紙面と投稿で品目の線引きを揃えるため共有しており、片方だけ変えない。新しい対象外品目が出たら両リポジトリに足す。"
   },
 
   "accounts": {
@@ -40,18 +45,22 @@
       "url": "https://www.instagram.com/brand_ritz/",
       "site": "https://brand-ritz.com/",
       "catchcopy": "人から人へ渡る喜びを『ブランドリッツ』",
+      "_catchcopy_note": "【2026-09-06 オーナー指示】このキャッチコピーはブランドリッツ(BtoC)のものであり、株式会社Ritz Solution Partner のコーポレートタグラインではない。社名と並べて書かない。他ブランド(ネクストプラチナム・色石マーケット)の投稿に転用しない。正本は Riuz-base brand-kit.json brands[brand-ritz].tagline。",
       "sub_accounts": [
-        { "handle": "@brandritzbuy", "url": "https://www.instagram.com/brandritzbuy/", "role": "買取訴求(全店共通)" },
+        { "handle": "@brand_ritz_kaitori", "url": "https://www.instagram.com/brand_ritz_kaitori/", "role": "買取訴求" },
         { "handle": "@brandritzrokko", "url": "https://www.instagram.com/brandritzrokko/", "role": "JR六甲道駅前店の店舗個別" }
       ],
+      "_sub_accounts_note": "【2026-09-06 オーナー確認】買取アカウントの正は @brand_ritz_kaitori(https://www.instagram.com/brand_ritz_kaitori/)。従来ここに書いていた @brandritzbuy は誤りなので削除した ── 実在はするが最終投稿 2023-08-10 で約3年休止(フォロワー1,076/投稿12件/推定ER 0.2%)、フォロワー監査で約半数がボット判定、公式サイトのミラーにも Instagram のリンクが1本も無い。この実測記録は Lear0511/Riuz-Instagram にあるが、1,076フォロワーという数字だけを見て @brandritzbuy を復活させないこと。@brand_ritz_kaitori 側のフォロワー数・投稿数・プロフィール文は未確認(Instagram を未認証で開けないため)。推測で埋めない。旧 role の『(全店共通)』は旧アカウントに紐づく未確認の属性なので引き継いでいない。",
       "audience": "ブランド品・貴金属を売りたい一般消費者(神戸・阪神間)。20代〜70代、主婦・会社員・経営者・退職者",
       "tone": "誠実で親しみやすい。価値・信頼・利便性。『迷わずブランドリッツ』。煽らない・不透明にしない",
       "colors": { "primary": "#E96081", "gold": "#F5B32D", "blue": "#3B82C5", "bg": "#DFEFF8", "subtext": "#A8A4A1", "text": "#3E3A39" },
       "items": [
-        "ブランドバッグ", "財布・小物", "時計", "アンティーク時計", "アクセサリー", "宝石・色石",
-        "貴金属(金・プラチナ)", "金貨・記念硬貨", "着物", "毛皮", "お酒", "古美術品",
-        "万年筆・ライター", "切手・テレカ", "食器", "カメラ", "香水"
+        "貴金属(金・プラチナ)", "ブランド品", "宝石", "ダイヤモンド", "ブランド衣類", "時計",
+        "着物", "切手・テレカ", "お酒", "骨董品", "ブランドバッグ", "財布・小物",
+        "アクセサリー", "毛皮", "金貨・記念硬貨", "万年筆・ライター", "食器", "古美術品",
+        "古いカメラ", "アンティーク時計", "香水"
       ],
+      "_items_note": "正本は Riuz-base の brand-kit/brand-kit.json brands[0].buyItems(21件・2026-09-06)。並びも語もキットに合わせてある(丸括弧だけ本ファイルの表記に揃えて半角)。品目を推測で足さない・減らさない。",
       "pillars": [
         "品目別の査定ポイント(どこを見て値段がつくか)",
         "訳あり品も買取OK(他店で断られた・壊れた・保証書なし・汚れやほつれ)",
@@ -83,9 +92,9 @@
     "next-platinum": {
       "brand": "ネクストプラチナム",
       "type": "BtoB",
-      "handle": null,
-      "url": null,
-      "_handle_note": "brand-kit に Instagram の記載なし。運用開始前に実アカウントを確認して handle / url を埋める(推測で入れない)。",
+      "handle": "@next.platinum",
+      "url": "https://www.instagram.com/next.platinum/",
+      "_handle_note": "公式サイトのSNS欄に掲出された Instagram の QR コード画像から確認(2026-09-06)。画像下部にハンドル『NEXT.PLATINUM』が印字されているためデコード不要。出典 https://next-platinum.com/themes/main/assets/img/qr_instagram.png / 掲出ページ /personal/ と /personal02/。正本は Riuz-base の brand-kit/company/brands/next-platinum.md。プロアカウント化と Facebook ページ連携の状況は未確認。",
       "site": "https://next-platinum.com/",
       "catchcopy": "新しいチャレンジをしなければ、新しい未来は生まれない／どこよりも高くお買取致します",
       "sub_accounts": [],
@@ -117,9 +126,9 @@
     "iroishi-market": {
       "brand": "色石マーケット",
       "type": "BtoB",
-      "handle": null,
-      "url": null,
-      "_handle_note": "brand-kit に Instagram の記載なし。運用開始前に実アカウントを確認して handle / url を埋める(推測で入れない)。",
+      "handle": "@iroishi.market",
+      "url": "https://www.instagram.com/iroishi.market/",
+      "_handle_note": "実アカウントはオーナー提供のスクリーンショット(2026-09-06)で確認して記入。表示名「色石マーケット｜業者様専用 色石買取」／カテゴリ「ショッピング・小売り」／投稿数 0(2026-09-06 時点)。プロフィール文は末尾が省略表示のため全文不明で、ここには写さない。プロアカウント(ビジネス/クリエイター)化と Facebook ページ連携は未確認。brand-kit には未記載のため、そちらへの反映は別途行う。",
       "site": "https://iroishi-market.com/",
       "catchcopy": "どんなルースでも値段がつきます",
       "sub_accounts": [],
