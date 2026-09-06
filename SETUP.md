@@ -115,7 +115,7 @@ python3 instagram/build-posts.py
    → 2026-09-02-next-platinum-review.md / 2026-09-02-next-platinum-schedule.csv / 2026-09-02-next-platinum-captions/
 ```
 
-**ネクストプラチナムに WARN が1件出るのは正常です。** このブランドは Instagram の実アカウントが未確認のため、`instagram/accounts.json` の `handle` を空にしてあります。推測で埋めず、実アカウントを確認できてから入れてください。WARN は出力を止めません（ファイルは生成されます）。
+**ハンドル未設定の WARN は 2026-09-06 に解消しました。** 3ブランドとも `instagram/accounts.json` に `handle` / `url` が入っています（ネクストプラチナムは公式サイトのSNS欄のQRコード画像から確認）。`publish_at` が過去の日時になっている投稿では別の WARN が出ますが、これは日時を直せば消えます。WARN は出力を止めません（ファイルは生成されます）。
 
 色石マーケットは 2026-09-06 に実アカウント（`@iroishi.market`）を確認して記入済みなので、この WARN は出ません。
 
@@ -232,7 +232,7 @@ ls instagram/out/
 | `処理する投稿バッチが無い（instagram/posts/*.json）` | `instagram/posts/` に JSON が1つも無い | Web版 Claude から返ってきた JSON を `instagram/posts/` に保存してから実行する |
 | `account "..." が無い` | `--prompt` に渡した名前が違う | `brand-ritz` / `next-platinum` / `iroishi-market` のいずれかを指定する |
 | Meta Business Suite に該当の Instagram アカウントが出てこない | プロアカウント（ビジネス／クリエイター）になっていない、または Facebook ページと連携できていない | 「7. Meta Business Suite 側の準備」を先に済ませる |
-| ネクストプラチナムを予約しようとしたが、どのアカウントか分からない | 実アカウントが未確認で `instagram/accounts.json` の `handle` が空のまま | 実アカウントを特定してから `handle` / `url` を埋める。推測で埋めない |
+| ネクストプラチナムを予約しようとしたが、どのアカウントか分からない | `instagram/accounts.json` の `handle` を見る | `@next.platinum`。プロアカウント化と Facebook ページ連携は未確認なので、選べない場合はそちらを先に確かめる |
 | 公開された投稿の1件目のコメントにハッシュタグが入っていない | Meta Business Suite には1件目のコメントを自動投稿する機能が無い | ハッシュタグはキャプション本文に入れる（`hashtag_placement` の既定は `caption`）。`first_comment` の中身は公開後に手でコメントする |
 
 ### 迷ったら最初に確認する2つ
@@ -279,7 +279,7 @@ ls instagram/
 
 **3 は推測で埋めないでください。** ネクストプラチナムの Instagram は brand-kit に記載が無く、`accounts.json` では空のままにしてあります。実アカウントを確認できるまでは WARN が出続けるのが正しい状態です（手順3の説明を参照）。
 
-色石マーケット（`@iroishi.market`）は手順3を済ませましたが、**手順1・2（プロアカウント化と Facebook ページ連携）は未確認**です。予約投稿の前に Meta Business Suite で実際に選べるか確かめてください。
+BtoB の2ブランド（`@iroishi.market` / `@next.platinum`）は手順3を済ませましたが、**手順1・2（プロアカウント化と Facebook ページ連携）はどちらも未確認**です。予約投稿の前に Meta Business Suite で実際に選べるか確かめてください。
 
 ### ハッシュタグの扱い
 

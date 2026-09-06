@@ -15,14 +15,14 @@ API 連携を持たないぶんアカウント停止のリスクが小さく、�
 | ブランド | 種別 | アカウント | 投稿頻度の目安 |
 |---|---|---|---|
 | ブランドリッツ | BtoC | [@brand_ritz](https://www.instagram.com/brand_ritz/)（本体）／[@brandritzbuy](https://www.instagram.com/brandritzbuy/)（買取）／[@brandritzrokko](https://www.instagram.com/brandritzrokko/)（六甲道店） | 週4本 19:00 |
-| ネクストプラチナム | BtoB | **未設定** | 週2本 12:00 |
+| ネクストプラチナム | BtoB | [@next.platinum](https://www.instagram.com/next.platinum/) | 週2本 12:00 |
 | 色石マーケット | BtoB | [@iroishi.market](https://www.instagram.com/iroishi.market/) | 週2本 12:00 |
 
-ネクストプラチナムの Instagram は brand-kit に記載が無く、実アカウントも未確認。
-**実アカウントを確認して `accounts.json` の `handle` / `url` を埋めるまで、このブランドは検証時に WARN が出続ける**（推測で埋めないこと）。
+BtoB の2ブランドは 2026-09-06 に一次情報で確認し、`accounts.json` に記入済み（ハンドル未設定の WARN は解消）。
+色石マーケットはオーナー提供のスクリーンショット、ネクストプラチナムは公式サイトのSNS欄に掲出された
+QR コード画像（画像下部にハンドル「NEXT.PLATINUM」が印字されている）が出典。
 
-色石マーケットは 2026-09-06 にオーナー提供の一次情報（スクリーンショット）で確認し、`accounts.json` に記入済み（WARN は解消）。
-**プロアカウント（ビジネス／クリエイター）か否かと Facebook ページ連携は未確認**なので、予約投稿の前に実機で確かめること。
+**どちらもプロアカウント（ビジネス／クリエイター）か否かと Facebook ページ連携は未確認**なので、予約投稿の前に実機で確かめること。
 
 ## 全体の流れ
 

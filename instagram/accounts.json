@@ -83,9 +83,9 @@
     "next-platinum": {
       "brand": "ネクストプラチナム",
       "type": "BtoB",
-      "handle": null,
-      "url": null,
-      "_handle_note": "brand-kit に Instagram の記載なし。運用開始前に実アカウントを確認して handle / url を埋める(推測で入れない)。",
+      "handle": "@next.platinum",
+      "url": "https://www.instagram.com/next.platinum/",
+      "_handle_note": "公式サイトのSNS欄に掲出された Instagram の QR コード画像から確認(2026-09-06)。画像下部にハンドル『NEXT.PLATINUM』が印字されているためデコード不要。出典 https://next-platinum.com/themes/main/assets/img/qr_instagram.png / 掲出ページ /personal/ と /personal02/。正本は Riuz-base の brand-kit/company/brands/next-platinum.md。プロアカウント化と Facebook ページ連携の状況は未確認。",
       "site": "https://next-platinum.com/",
       "catchcopy": "新しいチャレンジをしなければ、新しい未来は生まれない／どこよりも高くお買取致します",
       "sub_accounts": [],
